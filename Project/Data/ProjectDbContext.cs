@@ -8,6 +8,7 @@ namespace Project.Data
           public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options) { }
 
           public DbSet<Employee> Employees { get; set; }
+          public DbSet<Department> Departments { get; set; }
 
 
      }

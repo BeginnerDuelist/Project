@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Project.Models.Domain;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.Models
 {
@@ -8,6 +9,6 @@ namespace Project.Models
           public string Name { get; set; }
           public string Email { get; set; }
           public DateTime BirthDate { get; set; }
-          public string Department { get; set; }
+          public Department Department { get; set; }
      }
 }
