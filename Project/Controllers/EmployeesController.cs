@@ -7,17 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project.Data;
 using Project.Models.Domain;
+using Project.Service.Interface;
 
 namespace Project.Controllers
 {
     public class EmployeesController : Controller
     {
         private readonly ProjectDbContext _context;
+        private readonly IEmployeeService _employeeService;
+          public IEmployeeService EmployeeService { get; }
 
-        public EmployeesController(ProjectDbContext context)
+          public EmployeesController(ProjectDbContext context, IEmployeeService employeeService)
         {
             _context = context;
-        }
+            _employeeService = employeeService;
+          }
 
         // GET: Employees
         public async Task<IActionResult> Index()
@@ -59,7 +63,7 @@ namespace Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Email,BirthDate,DepartmentId")] Employee employee)
         {
-            
+                _employeeService.validateEmail(employee.Email);
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
